@@ -1,0 +1,5 @@
+Godot Engine v4.1.3.stable.official.f06b6836a - https://godotengine.org
+Vulkan API 1.3.260 - Forward+ - Using Vulkan Device #0: NVIDIA - NVIDIA GeForce RTX 3060
+ 
+USER ERROR: Node not found: "label" (relative to "/root/Game stage").
+   at: get_node (scene/main/node.cpp:1634)
