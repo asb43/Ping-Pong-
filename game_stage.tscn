@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://bobhy4f6grciu"]
+
+[ext_resource type="PackedScene" uid="uid://dx441oxs51a3s" path="res://player.tscn" id="1_15esx"]
+[ext_resource type="Script" path="res://game_stage.gd" id="1_v3lde"]
+[ext_resource type="PackedScene" uid="uid://bfycdw7e8nbx7" path="res://ball.tscn" id="2_o7dck"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2iv3"]
+size = Vector2(1167, 43)
+
+[sub_resource type="SystemFont" id="SystemFont_pe77h"]
+font_names = PackedStringArray("Bauhaus 93")
+
+[node name="Game stage" type="Node2D"]
+script = ExtResource("1_v3lde")
+
+[node name="Walls" type="Node2D" parent="."]
+position = Vector2(-2, -1)
+
+[node name="Top Wall" type="Area2D" parent="Walls"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top Wall"]
+position = Vector2(573.5, -11.5)
+shape = SubResource("RectangleShape2D_p2iv3")
+
+[node name="Bottom wall" type="Area2D" parent="Walls"]
+position = Vector2(0, 651)
+scale = Vector2(1.00321, 0.991106)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom wall"]
+position = Vector2(573.5, -11.5)
+shape = SubResource("RectangleShape2D_p2iv3")
+
+[node name="Left Wall" type="Area2D" parent="Walls"]
+position = Vector2(-30, 0)
+rotation = 1.5708
+scale = Vector2(0.55, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left Wall"]
+position = Vector2(573.5, -11.5)
+shape = SubResource("RectangleShape2D_p2iv3")
+
+[node name="Right Wall" type="Area2D" parent="Walls"]
+position = Vector2(1162, 0)
+rotation = 1.5708
+scale = Vector2(0.55, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right Wall"]
+position = Vector2(573.5, -11.5)
+shape = SubResource("RectangleShape2D_p2iv3")
+
+[node name="Player" parent="." instance=ExtResource("1_15esx")]
+
+[node name="Player2" parent="." instance=ExtResource("1_15esx")]
+position = Vector2(880, 0)
+side = "p2"
+
+[node name="Ball" parent="." instance=ExtResource("2_o7dck")]
+position = Vector2(576, 296)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 224.0
+offset_top = 32.0
+offset_right = 264.0
+offset_bottom = 58.0
+scale = Vector2(7.42006, 5.99212)
+theme_override_fonts/font = SubResource("SystemFont_pe77h")
+text = "0"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 840.0
+offset_top = 40.0
+offset_right = 880.0
+offset_bottom = 66.0
+scale = Vector2(7.42006, 5.99212)
+theme_override_fonts/font = SubResource("SystemFont_pe77h")
+text = "0"
+
+[connection signal="body_entered" from="Walls/Top Wall" to="." method="_on_top_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Bottom wall" to="." method="_on_bottom_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Left Wall" to="." method="_on_left_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Right Wall" to="." method="_on_right_wall_body_entered"]
